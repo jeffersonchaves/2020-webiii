@@ -7,11 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-	<h1>Página Inicial</h1>
 	
-	<a href="/app/admin/produtos">produtos</a><br />
-	<a href="/app/admin/produtos?acao=cadastro">cadastro</a>
+	<h1>login</h1>
+
+	<form action="/app/login">
+	
+		<input type="text" name="inputLogin" />
+		<br />
+		<input type="password" name="inputSenha" />
+		
+		<input type="submit" />
+	</form>
+
 
 </body>
 </html>

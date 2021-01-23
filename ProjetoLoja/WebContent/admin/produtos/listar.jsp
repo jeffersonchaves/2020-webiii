@@ -10,8 +10,6 @@
 </head>
 <body>
 
-<img src="/app/assets/imgs/keyboard.jpg" alt="" />
-
 	<ul>
 	<c:forEach var="produto" items="${produtos}">
 		

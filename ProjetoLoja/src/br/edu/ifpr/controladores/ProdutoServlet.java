@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.edu.ifpr.modelos.Produto;
 import br.edu.ifpr.repositorio.ProdutoRepositorio;
@@ -24,6 +25,14 @@ public class ProdutoServlet extends HttpServlet {
 		
 		String acao = req.getParameter("acao") != null ?  req.getParameter("acao") : "listar";
 		
+		//Ideal - LoginService
+		HttpSession sessao = req.getSession();
+				
+		if(sessao.getAttribute("estaLogado") == null) {
+			resp.sendRedirect("/app/admin/login.jsp");
+		}
+		
+		
 		switch (acao) {
 			
 			case "listar":
@@ -31,7 +40,11 @@ public class ProdutoServlet extends HttpServlet {
 				break;
 				
 			case "cadastro":
-				resp.sendRedirect("/app/admin/produtos/cadastrar.jsp");
+				
+				if(!resp.isCommitted()) {
+					resp.sendRedirect("/app/admin/produtos/cadastrar.jsp");
+				}
+				
 				break;
 				
 			case "cadastrar":
@@ -57,7 +70,7 @@ public class ProdutoServlet extends HttpServlet {
 			
 			this.listar(req, resp);
 			
-		}catch (Exception e) {
+		} catch (Exception e) {
 			//acao caso algo dê errado
 		}
 	}
@@ -65,7 +78,11 @@ public class ProdutoServlet extends HttpServlet {
 	private void listar(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("produtos", repositorio.buscarTodos());
 		RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/produtos/listar.jsp");
-		dispatcher.forward(req, resp);
+		
+		if(!resp.isCommitted()) {
+			dispatcher.forward(req, resp);
+		}
+		
 	}
 
 }
