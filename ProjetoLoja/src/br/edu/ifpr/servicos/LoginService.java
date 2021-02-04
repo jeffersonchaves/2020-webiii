@@ -31,8 +31,10 @@ public class LoginService {
 			resp.sendRedirect("/app/admin");
 		
 		} catch (Exception e) {
-			RequestDispatcher dispatcher = req.getRequestDispatcher("/app/admin/login.jsp");
-			req.setAttribute("erro", e.getMessage());
+			
+			req.setAttribute("mensagemErro", "erro: " + e.getMessage());
+
+			RequestDispatcher dispatcher = req.getRequestDispatcher("/admin/login.jsp");
 			dispatcher.forward(req, resp);
 		}
 		

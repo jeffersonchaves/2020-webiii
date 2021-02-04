@@ -20,7 +20,7 @@ public class LoginRepositorio {
 		
 		Usuario usuario = null;
 		
-		String sql = "SELECT * FROM usuarios login = ? AND senha = ?";
+		String sql = "SELECT * FROM usuarios WHERE login = ? AND senha = ?";
 		
 		try {
 		
@@ -36,13 +36,12 @@ public class LoginRepositorio {
 				usuario.setLogin( result.getString("login") );
 				usuario.setSenha( result.getString("senha") );
 			} else {
-				throw new Exception("usuario nao existe");
+				throw new Exception("usuario ou senha incorretos");
 			}
 			
 		
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new Exception(e.getMessage());
 		}
 		
 		return usuario;
