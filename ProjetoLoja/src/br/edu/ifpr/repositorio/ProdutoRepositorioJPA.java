@@ -45,24 +45,26 @@ public class ProdutoRepositorioJPA {
 		
 		EntityManager em = MyEntityManagerFactory.getEntityManager();
 		
+		Produto p = em.find(Produto.class, id);
+		
 		em.close();
 		
-		return em.find(Produto.class, id);
+		return p;
 		
 	}
 	
 	public List<Produto> buscarTodos() {
 		EntityManager em = MyEntityManagerFactory.getEntityManager();
-		List<Produto> produtos = em.createNativeQuery("SELECT * FROM produtos", Produto.class).getResultList();
+		List<Produto> produtos = em.createQuery("SELECT p FROM Produto p").getResultList();
 		
 		em.close();
 		
 		return produtos;
 	}
 	
-	public List<Produto> buscarTodos2() {
+	public List<Produto> buscarTodosNativo() {
 		EntityManager em = MyEntityManagerFactory.getEntityManager();
-		List<Produto> produtos = em.createQuery("SELECT p FROM Produto p").getResultList();
+		List<Produto> produtos = em.createNativeQuery("SELECT * FROM produtos", Produto.class).getResultList();
 		
 		em.close();
 		
