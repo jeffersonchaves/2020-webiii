@@ -1,13 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>IFPR TechStore</title>
 	
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="/app/assets/css/dashboard.css" />
@@ -29,7 +29,7 @@
 			placeholder="buscar produtos" aria-label="buscar">
 
 		<div class="navbar-nav px-3">
-			<a class="nav-link" href="#">sair</a>
+			<a class="nav-link" href="/app/login?acao=logout">sair</a>
 		</div>
 	</header>
 
@@ -41,16 +41,15 @@
 
 					<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
 						
-						<span>Produtos</span> <a class="link-secondary" href="/app/admin/produtos"
-							aria-label="Add a new report"> a<span
-							data-feather="plus-circle"></span>
+						 <a class="link-secondary" href="/app/admin/produtos?acao=listar">
+						 	<span>Produtos</span>
 						</a>
 					</h6>
 					
 					<ul class="nav flex-column mb-2">
 						<li class="nav-item"><a class="nav-link" 
 							href="/app/admin/produtos?acao=cadastro">cadastrar produto</a></li>
-						<li class="nav-item"><a class="nav-link" href="#">usuários</a></li>
+						<li class="nav-item"><a class="nav-link" href="#">usuÃ¡rios</a></li>
 						
 					</ul>
 				</div>
@@ -75,7 +74,12 @@
 				    <tr>
 				      <th scope="row">${produto.id}</th>
 				      <td>${produto.nome}</td>
-				      <td>${produto.preco}</td>
+				      
+				      <td>
+				      	<fmt:setLocale value = "pt-br"/>
+				     	<fmt:formatNumber value="${produto.preco}" type="currency"/>
+				      </td>
+				      
 				      <td>
 				      	<fmt:formatDate pattern="dd-MM-yyyy" value="${produto.dataCadastro}" />
 				    </tr>

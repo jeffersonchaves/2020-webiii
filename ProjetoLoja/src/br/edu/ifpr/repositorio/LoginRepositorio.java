@@ -36,7 +36,7 @@ public class LoginRepositorio {
 				usuario.setLogin( result.getString("login") );
 				usuario.setSenha( result.getString("senha") );
 			} else {
-				throw new Exception("usuario ou senha incorretos");
+				throw new Exception("usuário ou senha incorretos");
 			}
 			
 		

@@ -8,12 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import br.edu.ifpr.modelos.Produto;
 import br.edu.ifpr.repositorio.ProdutoRepositorio;
 
-@WebServlet({"/admin", "/admin/produtos"})
+@WebServlet({"","/admin", "/admin/produtos"})
 public class ProdutoServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
@@ -24,14 +22,6 @@ public class ProdutoServlet extends HttpServlet {
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String acao = req.getParameter("acao") != null ?  req.getParameter("acao") : "listar";
-		
-		//Ideal - LoginService
-		HttpSession sessao = req.getSession();
-				
-		if(sessao.getAttribute("estaLogado") == null) {
-			resp.sendRedirect("/app/admin/login.jsp");
-		}
-		
 		
 		switch (acao) {
 			

@@ -20,7 +20,22 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		service.login(req, resp);
+		String acao = req.getParameter("acao") != null ? req.getParameter("acao") : "default";
+		
+		switch (acao) {
+			case "login":
+				service.login(req, resp);
+				break;
+			
+			case "logout":
+				service.logout(req, resp);
+				break;
+	
+			default:
+				resp.sendRedirect("/app/admin/login.jsp");
+				break;
+		}
+		
 		
 	}
 

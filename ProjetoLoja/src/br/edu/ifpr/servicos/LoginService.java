@@ -40,4 +40,31 @@ public class LoginService {
 		
 	}
 
+	public void logout(HttpServletRequest req, HttpServletResponse resp) {
+		
+		HttpSession sessao = req.getSession();
+		sessao.invalidate();
+		
+		try {
+		
+			resp.sendRedirect("/app/admin/login.jsp");
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public boolean estaLogado(HttpServletRequest req) {
+		
+		HttpSession sessao = req.getSession();
+		
+		boolean estaLogado = false;
+			
+		if(sessao.getAttribute("estaLogado") != null && (boolean) sessao.getAttribute("estaLogado")) {
+			estaLogado = true;
+		}
+		
+		return estaLogado;
+	}
 }
